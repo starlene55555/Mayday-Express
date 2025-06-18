@@ -139,7 +139,7 @@ def main():
     dir_options = dir_df["direction"].tolist()
     dir_labels = dict(zip(dir_df["direction"], dir_df["direction_name"]))
 
-    direction = st.radio("選擇方向（僅用於選站）", options=dir_options, format_func=lambda x: dir_labels.get(x, f"方向 {x}"))
+    direction = st.radio("選擇方向", options=dir_options, format_func=lambda x: dir_labels.get(x, f"方向 {x}"))
 
     stations = df[(df["route_id"] == selected_route) & (df["direction"] == direction)][
         ["order", "stop_name"]].sort_values("order")
@@ -177,4 +177,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
