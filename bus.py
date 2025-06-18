@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 
 @st.cache_data
@@ -148,8 +148,9 @@ def main():
     col1, col2 = st.columns(2)
     hour_options = list(range(24))
     minute_options = list(range(60))
-    default_hour = datetime.now().hour
-    default_minute = datetime.now().minute
+    default_now = datetime.now(timezone.utc) + timedelta(hours=8)
+    default_hour = default_now.hour
+    default_minute = default_now.minute
 
     if "selected_hour" not in st.session_state:
         st.session_state.selected_hour = default_hour
