@@ -124,10 +124,10 @@ def simulate_full_route_schedule(route_df, selected_route, selected_station, sel
 
 
 def main():
-    page = st.sidebar.selectbox("選擇頁面", ["MAYDAY EXPRESS 🚌 🚝 時間估算", "MAYDAY EXPRESS 車牌資訊"])
+    page = st.sidebar.selectbox("選擇頁面", ["MAYDAY EXPRESS 時間估算", "MAYDAY EXPRESS 車牌資訊"])
 
-    if page == "MAYDAY EXPRESS 🚌 🚝 時間估算":
-        st.title("MAYDAY EXPRESS 🚌 🚝 時間估算")
+    if page == "MAYDAY EXPRESS 時間估算":
+        st.title("MAYDAY EXPRESS 時間估算")
 
         df = load_stops()
         route_options = df[["route_id", "route_display"]].drop_duplicates()
@@ -188,4 +188,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
