@@ -1,6 +1,24 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta, timezone
+import random
+
+light_colors = ["#69CAFF", "#E87361", "#F6E039", "#FF96CC", "#A0FF89"]
+
+if "bg_color" not in st.session_state:
+    st.session_state.bg_color = random.choice(light_colors)
+
+bg_color = st.session_state.bg_color
+
+st.markdown(f"""
+    <style>
+        .stApp {{
+            background-color: {bg_color} !important;
+            /* 可選：讓背景覆蓋整個視窗 */
+            min-height: 100vh;
+        }}
+    </style>
+""", unsafe_allow_html=True)
 
 
 @st.cache_data
@@ -112,8 +130,10 @@ def main():
         st.title("MAYDAY EXPRESS 🚌 🚝 時間估算")
 
         df = load_stops()
-        route_options = df["route_id"].unique()
-        selected_route = st.selectbox("選擇路線", route_options)
+        route_options = df[["route_id", "route_display"]].drop_duplicates()
+        route_dict = dict(zip(route_options["route_display"], route_options["route_id"]))
+        selected_display = st.selectbox("選擇路線", route_options["route_display"])
+        selected_route = route_dict[selected_display]
 
         dir_df = df[df["route_id"] == selected_route][["direction", "direction_name"]].drop_duplicates()
         dir_options = dir_df["direction"].tolist()
