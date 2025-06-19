@@ -106,10 +106,10 @@ def simulate_full_route_schedule(route_df, selected_route, selected_station, sel
 
 
 def main():
-    page = st.sidebar.selectbox("選擇頁面", ["MAYDAY EXPRESS 🚌🚝 時間估算", "MAYDAY EXPRESS車牌資訊"])
+    page = st.sidebar.selectbox("選擇頁面", ["MAYDAY EXPRESS 🚌 🚝 時間估算", "MAYDAY EXPRESS 車牌資訊"])
 
-    if page == "MAYDAY EXPRESS 🚌🚝 時間估算":
-        st.title("MAYDAY EXPRESS 🚌🚝 時間估算")
+    if page == "MAYDAY EXPRESS 🚌 🚝 時間估算":
+        st.title("MAYDAY EXPRESS 🚌 🚝 時間估算")
 
         df = load_stops()
         route_options = df["route_id"].unique()
@@ -157,8 +157,8 @@ def main():
         st.write(f" {dir_labels.get(2, '回程')} ")
         st.dataframe(pivot_return, use_container_width=True)
 
-    elif page == "MAYDAY EXPRESS車牌資訊":
-        st.title("MAYDAY EXPRESS車牌資訊")
+    elif page == "MAYDAY EXPRESS 車牌資訊":
+        st.title("MAYDAY EXPRESS 車牌資訊")
         try:
             df_bus = pd.read_csv("bus_no.csv")
             st.dataframe(df_bus, use_container_width=True, hide_index=True)
